@@ -1,0 +1,21 @@
+// Lesson1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+
+int main()
+{
+	std::cout << "Hello, World!";
+	
+    return 0;
+}
+
+https://otus.ru/learning/14350/#/
+https://otus-cpp.slack.com/messages/C7UN2T3NY/
+isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html
+https://github.com/ZVY
+https://travis-ci.org
+https://bintray.com
+
+https://bintray.com/zvy/OTUS/Lesson1
