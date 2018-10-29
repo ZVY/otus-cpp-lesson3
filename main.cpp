@@ -103,35 +103,25 @@ std::string filter_any(std::vector<IpAddress> &ip_pool, size_t number)
 			msg += ip.printIP() + "\n";
 	}
 
+	msg.erase(msg.end()-1);
+
 	return msg;
 }
 
 int main(int argc, char const *argv[])
 {
 	try
-	{		
-		//argv[1] = "D:/Proj/OTUS/c++/otus_cpp_lesson3/ip_filter/Debug/ip.tsv";
-		
+	{	
 		std::ifstream ifs(argv[1]);
-
 		std::vector<IpAddress> ip_pool;	
-
-		/*char buf[25];
-		while (ifs.good()) {
-			ifs.getline(buf, 25);			
-			if (!std::string(buf).empty())
-			{
-				ip_pool.emplace_back(getIP(std::string(buf), '\t'));
-			}						
-		}*/
-
+		
 		for (std::string line; std::getline(std::cin, line);)
 		{
 			if (!std::string(line).empty())
 			{
 				ip_pool.emplace_back(getIP(line, '\t'));
 			}
-		}
+		}		
 		
 		reverseLexSort(ip_pool);
 
@@ -145,6 +135,7 @@ int main(int argc, char const *argv[])
 		std::cerr << e.what() << std::endl;
 	}
 
-	system("pause");
+	//system("pause");
+
 	return 0;
 }
