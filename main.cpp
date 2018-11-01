@@ -67,7 +67,7 @@ void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int octet)
 	}
 }
 
-int main(int, char const *)
+int main(int, char const **)
 {
 	try
 	{	
