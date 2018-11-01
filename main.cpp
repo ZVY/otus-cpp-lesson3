@@ -70,7 +70,7 @@ void printFilterAny(const std::vector<std::vector<int>>& ip_pool, size_t octet)
 int main(int argc, char const *argv[])
 {
 	try
-	{			
+	{	
 		std::vector<std::vector<int>> ip_pool;
 		for (std::string line; std::getline(std::cin, line);)
 		{
@@ -80,7 +80,7 @@ int main(int argc, char const *argv[])
 			}
 		}
 
-		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<>());
+		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<std::vector<int>>());
 
 		printIPPool(ip_pool);
 		printFilter(ip_pool, 1);
@@ -91,8 +91,6 @@ int main(int argc, char const *argv[])
 	{
 		std::cerr << e.what() << std::endl;
 	}
-
-	system("pause");
 
 	return 0;
 }
