@@ -34,7 +34,7 @@ void printIPPool(const std::vector<std::vector<int>>& ip_pool)
 	}
 }
 
-void printFilter(const std::vector<std::vector<int>>& ip_pool, size_t octet1)
+void printFilter(const std::vector<std::vector<int>>& ip_pool, int octet1)
 {
 	for (auto ip : ip_pool)
 	{
@@ -45,7 +45,7 @@ void printFilter(const std::vector<std::vector<int>>& ip_pool, size_t octet1)
 	}
 }
 
-void printFilter(const std::vector<std::vector<int>>& ip_pool, size_t octet1, size_t octet2)
+void printFilter(const std::vector<std::vector<int>>& ip_pool, int octet1, int octet2)
 {
 	for (auto ip : ip_pool)
 	{
@@ -56,7 +56,7 @@ void printFilter(const std::vector<std::vector<int>>& ip_pool, size_t octet1, si
 	}
 }
 
-void printFilterAny(const std::vector<std::vector<int>>& ip_pool, size_t octet)
+void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int octet)
 {
 	for (auto ip : ip_pool)
 	{
