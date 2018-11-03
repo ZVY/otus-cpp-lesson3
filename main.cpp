@@ -56,11 +56,12 @@ void printFilter(const std::vector<std::vector<int>>& ip_pool, int octet1, int o
 	}
 }
 
-void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int octet)
-{
-	for (auto ip : ip_pool)
+void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int req_octet)
+{	
+	std::vector<std::vector<int>> vec{ {23,45,28,45}, {1,46,78,66}, {4,99,245,47}, {46,99,245,47}, {4,46,275,46} };
+	for (auto ip : vec)
 	{
-		if ((ip[0] == octet) || (ip[1] == octet) || (ip[2] == octet) || (ip[3] == octet))
+		if (std::any_of(ip.begin(), ip.end(), [=](int octet) { return octet == req_octet; }))
 		{
 			printIP(ip);
 		}
@@ -72,7 +73,7 @@ int main(int, char const **)
 	try
 	{	
 		std::vector<std::vector<int>> ip_pool;
-		for (std::string line; std::getline(std::cin, line);)
+		/*for (std::string line; std::getline(std::cin, line);)
 		{
 			if (!std::string(line).empty())
 			{
@@ -84,13 +85,15 @@ int main(int, char const **)
 
 		printIPPool(ip_pool);
 		printFilter(ip_pool, 1);
-		printFilter(ip_pool, 46, 70);
+		printFilter(ip_pool, 46, 70);*/
 		printFilterAny(ip_pool, 46);
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+	system("pause");
 
 	return 0;
 }
