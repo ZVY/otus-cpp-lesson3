@@ -34,32 +34,36 @@ void printIPPool(const std::vector<std::vector<int>>& ip_pool)
 	}
 }
 
-void printFilter(const std::vector<std::vector<int>>& ip_pool, int octet1)
-{
-	for (auto ip : ip_pool)
+template <typename D, typename... Args>
+void printFilter(D data, Args... args)
+{	
+	int numb = (sizeof ... (args));
+	std::vector<int> vecArg;
+	vecArg.reserve(numb);
+	auto result = { (vecArg.push_back(args), 0)... };
+		
+	for (auto ip : data)
 	{
-		if (ip[0] == octet1)
+		if (numb == 1)
 		{
-			printIP(ip);
+			if (ip[0] == vecArg[0])
+			{
+				printIP(ip);
+			}
 		}
-	}
-}
-
-void printFilter(const std::vector<std::vector<int>>& ip_pool, int octet1, int octet2)
-{
-	for (auto ip : ip_pool)
-	{
-		if ((ip[0] == octet1) && (ip[1] == octet2))
+		else if (numb == 2)
 		{
-			printIP(ip);
-		}
-	}
+			if ((ip[0] == vecArg[0]) && (ip[1] == vecArg[1]))
+			{
+				printIP(ip);
+			}
+		}		
+	}  
 }
 
 void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int req_octet)
 {	
-	std::vector<std::vector<int>> vec{ {23,45,28,45}, {1,46,78,66}, {4,99,245,47}, {46,99,245,47}, {4,46,275,46} };
-	for (auto ip : vec)
+	for (auto ip : ip_pool)
 	{
 		if (std::any_of(ip.begin(), ip.end(), [=](int octet) { return octet == req_octet; }))
 		{
@@ -73,19 +77,20 @@ int main(int, char const **)
 	try
 	{	
 		std::vector<std::vector<int>> ip_pool;
-		/*for (std::string line; std::getline(std::cin, line);)
+				
+		for (std::string line; std::getline(std::cin, line);)
 		{
 			if (!std::string(line).empty())
 			{
 				ip_pool.emplace_back(getIP(line, '\t'));
 			}
-		}
+		}		
 
 		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<std::vector<int>>());
 
 		printIPPool(ip_pool);
 		printFilter(ip_pool, 1);
-		printFilter(ip_pool, 46, 70);*/
+		printFilter(ip_pool, 46, 70);
 		printFilterAny(ip_pool, 46);
 	}
 	catch (const std::exception &e)
@@ -93,7 +98,7 @@ int main(int, char const **)
 		std::cerr << e.what() << std::endl;
 	}
 
-	system("pause");
+	//system("pause");
 
 	return 0;
 }
