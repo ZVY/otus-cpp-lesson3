@@ -41,24 +41,10 @@ void printFilter(D data, Args... args)
 	std::vector<int> vecArg;
 	vecArg.reserve(numb);
 	auto result = { (vecArg.push_back(args), 0)... };
-		
+			
 	for (auto ip : data)
-	{
-		if (numb == 1)
-		{
-			if (ip[0] == vecArg[0])
-			{
-				printIP(ip);
-			}
-		}
-		else if (numb == 2)
-		{
-			if ((ip[0] == vecArg[0]) && (ip[1] == vecArg[1]))
-			{
-				printIP(ip);
-			}
-		}		
-	}  
+		if (std::equal(ip.begin(), ip.begin() + vecArg.size(), vecArg.data()))
+		   printIP(ip);
 }
 
 void printFilterAny(const std::vector<std::vector<int>>& ip_pool, int req_octet)
@@ -85,7 +71,7 @@ int main(int, char const **)
 				ip_pool.emplace_back(getIP(line, '\t'));
 			}
 		}		
-
+		
 		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<std::vector<int>>());
 
 		printIPPool(ip_pool);
