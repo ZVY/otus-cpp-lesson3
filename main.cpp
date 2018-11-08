@@ -36,11 +36,8 @@ void printIPPool(const std::vector<std::vector<int>>& ip_pool)
 
 template <typename D, typename... Args>
 void printFilter(D data, Args... args)
-{	
-	int numb = (sizeof ... (args));
-	std::vector<int> vecArg;
-	vecArg.reserve(numb);
-	auto result = { (vecArg.push_back(args), 0)... };
+{		
+	std::vector<int> vecArg = { args... };
 			
 	for (auto ip : data)
 		if (std::equal(ip.begin(), ip.begin() + vecArg.size(), vecArg.data()))
